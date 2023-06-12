@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        fetch("https://restcountries.com/v3.1/all")
+        .then(function(data){
+            return data.json();
+        })
+        .then(function(obj){
+            var board=document.createElement("div");
+        board.style.height= "700px";
+        board.style.width= "1080px";
+        board.style.paddingLeft="125px "
+        board.style.display="flex";
+        board.style.flexdirection="row";
+        board.style.flexWrap="wrap";
+        obj.forEach(element => {
+            
+            var box=document.createElement("div");
+            box.style.height="150px";
+            box.style.width="120px";
+            box.style.backgroundColor="orange";
+            box.style.border="2px solid black";
+            box.style.color="black";
+            box.style.textAlign="center";
+            box.style.paddingTop="45px";
+            var img=document.createElement("img");
+            img.src=element.flags.png;
+            img.style.height="35px";
+            img.style.width="85px";
+            box.appendChild(img);
+            var para1=document.createElement("p");
+            para1.innerText=element.name.common;
+            box.appendChild(para1);
+            var para2=document.createElement("p");
+            para2.innerText=element.region;
+            box.appendChild(para2);
+            board.appendChild(box);
+        });
+        document.body.appendChild(board);
+        
+       
+        })
+        .catch(function(err){
+            console.error(err);
+        })
+    </script>
+</body>
+</html>
